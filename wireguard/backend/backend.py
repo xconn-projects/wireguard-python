@@ -7,6 +7,11 @@ import subprocess
 CONFIG_FILE = 'config.json'
 
 
+def is_root():
+    if os.geteuid() != 0:
+        raise RuntimeError("You need to run this script as root")
+
+
 def get_home_dir(client_name):
     home_dir = f"/home/{client_name}"
     if os.path.exists(home_dir):
@@ -112,6 +117,8 @@ def generate_preshared_key():
 
 
 def new_client():
+    is_root()
+
     if not os.path.exists(CONFIG_FILE):
         create_config()
 
@@ -184,6 +191,8 @@ AllowedIPs = {client_wg_ipv4}/32,{client_wg_ipv6}/128
 
 
 def list_clients():
+    is_root()
+
     wg_dir = '/etc/wireguard'
 
     if not os.path.exists(wg_dir):
