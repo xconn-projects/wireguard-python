@@ -10,11 +10,11 @@ def manage_menu():
 
         choice = input("Choose an option: ")
 
-        if choice == '1':
+        if choice == "1":
             backend.new_client()
-        elif choice == '2':
+        elif choice == "2":
             backend.list_clients()
-        elif choice == '3':
+        elif choice == "3":
             break
         else:
             print("Invalid choice. Please try again.")
